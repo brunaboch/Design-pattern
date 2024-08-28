@@ -1,0 +1,31 @@
+abstract class Modelo implements Cloneable {
+    public abstract Modelo criarClone();
+}
+
+class ModeloConcreto extends Modelo {
+    private String nome;
+
+    public ModeloConcreto(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public Modelo criarClone() {
+        return new ModeloConcreto(nome);
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo{" + "nome='" + nome + '\'' + '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ModeloConcreto modeloOriginal = new ModeloConcreto("Original");
+        ModeloConcreto clone = (ModeloConcreto) modeloOriginal.criarClone();
+
+        System.out.println(modeloOriginal);
+        System.out.println(clone);
+    }
+}
