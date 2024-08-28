@@ -1,0 +1,80 @@
+interface CategoriaA {
+    String acaoA();
+}
+
+interface CategoriaB {
+    String acaoB();
+}
+
+class ProdutoA1 implements CategoriaA {
+    @Override
+    public String acaoA() {
+        return "Ação do ProdutoA1";
+    }
+}
+
+class ProdutoA2 implements CategoriaA {
+    @Override
+    public String acaoA() {
+        return "Ação do ProdutoA2";
+    }
+}
+
+class ProdutoB1 implements CategoriaB {
+    @Override
+    public String acaoB() {
+        return "Ação do ProdutoB1";
+    }
+}
+
+class ProdutoB2 implements CategoriaB {
+    @Override
+    public String acaoB() {
+        return "Ação do ProdutoB2";
+    }
+}
+
+interface Fabrica {
+    CategoriaA criarA();
+    CategoriaB criarB();
+}
+
+class FabricaConcreta1 implements Fabrica {
+    @Override
+    public CategoriaA criarA() {
+        return new ProdutoA1();
+    }
+
+    @Override
+    public CategoriaB criarB() {
+        return new ProdutoB1();
+    }
+}
+
+class FabricaConcreta2 implements Fabrica {
+    @Override
+    public CategoriaA criarA() {
+        return new ProdutoA2();
+    }
+
+    @Override
+    public CategoriaB criarB() {
+        return new ProdutoB2();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Fabrica fabrica1 = new FabricaConcreta1();
+        CategoriaA produtoA1 = fabrica1.criarA();
+        CategoriaB produtoB1 = fabrica1.criarB();
+        System.out.println(produtoA1.acaoA());
+        System.out.println(produtoB1.acaoB());
+
+        Fabrica fabrica2 = new FabricaConcreta2();
+        CategoriaA produtoA2 = fabrica2.criarA();
+        CategoriaB produtoB2 = fabrica2.criarB();
+        System.out.println(produtoA2.acaoA());
+        System.out.println(produtoB2.acaoB());
+    }
+}
