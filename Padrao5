@@ -1,0 +1,25 @@
+class GestorUnico {
+    private static GestorUnico instancia;
+
+    private GestorUnico() {
+        // Construtor privado para evitar múltiplas instâncias
+    }
+
+    public static GestorUnico acessarInstancia() {
+        if (instancia == null) {
+            instancia = new GestorUnico();
+        }
+        return instancia;
+    }
+
+    public void exibirMensagem() {
+        System.out.println("Gerenciando única instância");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        GestorUnico gestor = GestorUnico.acessarInstancia();
+        gestor.exibirMensagem();
+    }
+}
