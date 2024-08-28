@@ -1,0 +1,31 @@
+interface InterfaceAlvo {
+    void acao();
+}
+
+class SistemaExistente {
+    public void acaoEspecifica() {
+        System.out.println("Ação específica do sistema existente");
+    }
+}
+
+class AdaptadorSistema implements InterfaceAlvo {
+    private SistemaExistente sistema;
+
+    public AdaptadorSistema(SistemaExistente sistema) {
+        this.sistema = sistema;
+    }
+
+    @Override
+    public void acao() {
+        sistema.acaoEspecifica();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        SistemaExistente sistemaExistente = new SistemaExistente();
+        InterfaceAlvo adaptador = new AdaptadorSistema(sistemaExistente);
+
+        adaptador.acao();
+    }
+}
