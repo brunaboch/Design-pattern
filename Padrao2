@@ -1,0 +1,50 @@
+interface Produto {
+    String operacao();
+}
+
+class ItemA implements Produto {
+    @Override
+    public String operacao() {
+        return "ItemA";
+    }
+}
+
+class ItemB implements Produto {
+    @Override
+    public String operacao() {
+        return "ItemB";
+    }
+}
+
+abstract class CriadorItem {
+    public abstract Produto criarItem();
+
+    public String realizarOperacao() {
+        Produto produto = criarItem();
+        return "Trabalhando com " + produto.operacao();
+    }
+}
+
+class FabricaItemA extends CriadorItem {
+    @Override
+    public Produto criarItem() {
+        return new ItemA();
+    }
+}
+
+class FabricaItemB extends CriadorItem {
+    @Override
+    public Produto criarItem() {
+        return new ItemB();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CriadorItem fabrica = new FabricaItemA();
+        System.out.println(fabrica.realizarOperacao());
+
+        fabrica = new FabricaItemB();
+        System.out.println(fabrica.realizarOperacao());
+    }
+}
