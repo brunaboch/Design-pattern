@@ -1,0 +1,83 @@
+class Produto {
+    private String parteA;
+    private String parteB;
+    private String parteC;
+
+    public void definirParteA(String parteA) {
+        this.parteA = parteA;
+    }
+
+    public void definirParteB(String parteB) {
+        this.parteB = parteB;
+    }
+
+    public void definirParteC(String parteC) {
+        this.parteC = parteC;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" + "parteA='" + parteA + '\'' + ", parteB='" + parteB + '\'' + ", parteC='" + parteC + '\'' + '}';
+    }
+}
+
+abstract class Construtor {
+    protected Produto produto;
+
+    public void iniciarProduto() {
+        produto = new Produto();
+    }
+
+    public Produto obterProduto() {
+        return produto;
+    }
+
+    public abstract void construirParteA();
+    public abstract void construirParteB();
+    public abstract void construirParteC();
+}
+
+class ConstrutorConcreto extends Construtor {
+    @Override
+    public void construirParteA() {
+        produto.definirParteA("Parte A");
+    }
+
+    @Override
+    public void construirParteB() {
+        produto.definirParteB("Parte B");
+    }
+
+    @Override
+    public void construirParteC() {
+        produto.definirParteC("Parte C");
+    }
+}
+
+class Diretor {
+    private Construtor construtor;
+
+    public void definirConstrutor(Construtor construtor) {
+        this.construtor = construtor;
+    }
+
+    public Produto montarProduto() {
+        construtor.iniciarProduto();
+        construtor.construirParteA();
+        construtor.construirParteB();
+        construtor.construirParteC();
+        return construtor.obterProduto();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Diretor diretor = new Diretor();
+        Construtor construtor = new ConstrutorConcreto();
+
+        diretor.definirConstrutor(construtor);
+        Produto produto = diretor.montarProduto();
+
+        System.out.println(produto);
+    }
+}
